@@ -15,9 +15,9 @@ import { createAppKit } from '@reown/appkit';
 import { EthersAdapter } from '@reown/appkit-adapter-ethers';
 const PROJECT_ID='f018499b1e4a94d961ab67aeeeff3254';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],tok=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim(),fmt=(n,d=0)=>Number(n).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
-let _t;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(_t);_t=setTimeout(()=>t.classList.remove('on'),2600)}
+let _t;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(_t);_t=setTimeout(()=>t.classList.remove('on'),4000)}
 function count(el,to,d=0){const f=+el.dataset.v||0;el.dataset.v=to;const t0=performance.now();(function s(t){const k=Math.min(1,(t-t0)/700);el.textContent=fmt(f+(to-f)*k,d);if(k<1)requestAnimationFrame(s)})(t0)}
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});$$('.rv').forEach(e=>io.observe(e));
+let jarPaused=false;document.addEventListener('visibilitychange',()=>{jarPaused=document.hidden;const wt=$('#wt');if(wt)wt.style.animationPlayState=jarPaused?'paused':'running'});
 const NETS={677:{rpc:'https://rpc.botchain.ai'},968:{rpc:'https://rpc.bohr.life'}};
 const CA={677:'0xc16be55D10fAe5d8bB29257129863fA328aC34FE',968:'0x05c622140978e400b8E45F709dcf332fA65c20f0'};
 const ABI=['function totalPools() view returns (uint256)','function getPool(uint256) view returns (address,address,address,string,uint256,uint256,uint256,bool)','function milestone(uint256,uint256) view returns (uint256)','function releasedTotal(uint256) view returns (uint256)','function create(string,address,uint256[],address) returns (uint256)','function fund(uint256) payable','function approveMilestone(uint256)','function complete(uint256)'];
